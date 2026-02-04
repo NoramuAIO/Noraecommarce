@@ -29,7 +29,7 @@
 
 ```bash
 # Projeyi klonla
-git clone https://github.com/NoramuAIO/Noracommerce.git
+git clone https://github.com/NoramuAIO/Noraecommarce.git
 cd Noracommerce/backend
 
 # Bağımlılıkları yükle
@@ -127,7 +127,7 @@ MIT License - detaylar için [LICENSE](LICENSE) dosyasına bakın.
 
 **NoramuAIO** - [@NoramuAIO](https://github.com/NoramuAIO)
 
-Proje Linki: [github.com/NoramuAIO/Noracommerce](https://github.com/NoramuAIO/Noracommerce)
+Proje Linki: [github.com/NoramuAIO/Noracommerce](https://github.com/NoramuAIO/Noraecommarce)
 
 ---
 
