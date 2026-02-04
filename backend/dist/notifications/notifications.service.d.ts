@@ -1,0 +1,52 @@
+import { PrismaService } from '../prisma/prisma.service';
+export declare class NotificationsService {
+    private prisma;
+    constructor(prisma: PrismaService);
+    private getSettings;
+    private sendDiscordWebhook;
+    private sendTelegramMessage;
+    private escapeMarkdown;
+    private capitalizeType;
+    private getColorForType;
+    notifyOrder(order: {
+        id: number;
+        productName: string;
+        userName: string;
+        userEmail: string;
+        amount: number;
+    }): Promise<void>;
+    notifyFreeOrder(order: {
+        id: number;
+        productName: string;
+        userName: string;
+        userEmail: string;
+    }): Promise<void>;
+    notifyPriceChange(product: {
+        id: number;
+        name: string;
+        oldPrice: number;
+        newPrice: number;
+        changedBy: string;
+    }): Promise<void>;
+    notifyProductUpdate(product: {
+        id: number;
+        name: string;
+        updateType: string;
+        details: string;
+        updatedBy: string;
+    }): Promise<void>;
+    notifyNewUser(user: {
+        id: number;
+        name: string;
+        email: string;
+        provider?: string;
+    }): Promise<void>;
+    notifyTicket(ticket: {
+        id: number;
+        subject: string;
+        userName: string;
+        userEmail: string;
+        priority?: string;
+    }): Promise<void>;
+    sendTestNotification(platform: 'discord' | 'telegram'): Promise<boolean>;
+}

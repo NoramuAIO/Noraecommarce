@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 3, 7, 18;
+  --background-end-rgb: 3, 7, 18;
+  
+  /* Renk Paleti */
+  --color-primary: #8B5CF6;
+  --color-primary-rgb: 139, 92, 246;
+  --color-accent: #EC4899;
+  --color-accent-rgb: 236, 72, 153;
+  --color-background: #030712;
+  --color-background-rgb: 3, 7, 18;
+  --color-surface: #111827;
+  --color-surface-rgb: 17, 24, 39;
+  --color-text: #F9FAFB;
+  --color-text-rgb: 249, 250, 251;
+  --color-text-secondary: #9CA3AF;
+  --color-text-secondary-rgb: 156, 163, 175;
+  --color-border: #1F2937;
+  --color-border-rgb: 31, 41, 55;
+  --color-success: #10B981;
+  --color-success-rgb: 16, 185, 129;
+  --color-warning: #F59E0B;
+  --color-warning-rgb: 245, 158, 11;
+  --color-error: #EF4444;
+  --color-error-rgb: 239, 68, 68;
+  --color-info: #3B82F6;
+  --color-info-rgb: 59, 130, 246;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500;
+  }
+  
+  .glass-card {
+    background-color: rgba(var(--color-surface-rgb), 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(var(--color-border-rgb), 0.5);
+    border-radius: 1rem;
+  }
+  
+  .glass-card-hover {
+    transition: all 0.5s;
+  }
+
+  .glass-card-hover:hover {
+    background-color: rgba(var(--color-surface-rgb), 0.7);
+    border-color: rgba(var(--color-border-rgb), 0.8);
+  }
+  
+  .glow-primary {
+    box-shadow: 0 0 60px rgba(var(--color-primary-rgb), 0.15);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 60px rgba(var(--color-accent-rgb), 0.15);
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+
+  /* Primary Button */
+  .btn-primary {
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 10px 40px rgba(var(--color-primary-rgb), 0.4);
+  }
+
+  /* Background utilities */
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+
+  .bg-success {
+    background-color: var(--color-success);
+  }
+
+  .bg-warning {
+    background-color: var(--color-warning);
+  }
+
+  .bg-error {
+    background-color: var(--color-error);
+  }
+
+  .bg-info {
+    background-color: var(--color-info);
+  }
+
+  .bg-primary-10 {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  .bg-primary-20 {
+    background-color: rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .bg-accent-10 {
+    background-color: rgba(var(--color-accent-rgb), 0.1);
+  }
+
+  .bg-accent-20 {
+    background-color: rgba(var(--color-accent-rgb), 0.2);
+  }
+
+  .bg-success-10 {
+    background-color: rgba(var(--color-success-rgb), 0.1);
+  }
+
+  .bg-warning-10 {
+    background-color: rgba(var(--color-warning-rgb), 0.1);
+  }
+
+  .bg-error-10 {
+    background-color: rgba(var(--color-error-rgb), 0.1);
+  }
+
+  .bg-info-10 {
+    background-color: rgba(var(--color-info-rgb), 0.1);
+  }
+
+  /* Text utilities */
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-success {
+    color: var(--color-success);
+  }
+
+  .text-warning {
+    color: var(--color-warning);
+  }
+
+  .text-error {
+    color: var(--color-error);
+  }
+
+  .text-info {
+    color: var(--color-info);
+  }
+
+  .text-primary-light {
+    color: rgba(var(--color-primary-rgb), 0.7);
+  }
+
+  /* Border utilities */
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+
+  .border-theme {
+    border-color: var(--color-border);
+  }
+
+  .border-primary-20 {
+    border-color: rgba(var(--color-primary-rgb), 0.2);
+  }
+
+  .border-primary-50 {
+    border-color: rgba(var(--color-primary-rgb), 0.5);
+  }
+
+  .border-accent {
+    border-color: var(--color-accent);
+  }
+
+  .border-success {
+    border-color: var(--color-success);
+  }
+
+  .border-warning {
+    border-color: var(--color-warning);
+  }
+
+  .border-error {
+    border-color: var(--color-error);
+  }
+
+  /* Focus utilities */
+  .focus-primary:focus {
+    border-color: rgba(var(--color-primary-rgb), 0.5);
+    outline: none;
+  }
+
+  /* Hover utilities */
+  .hover-border-primary:hover {
+    border-color: rgba(var(--color-primary-rgb), 0.5);
+  }
+
+  /* Shadow utilities */
+  .shadow-primary {
+    box-shadow: 0 10px 40px rgba(var(--color-primary-rgb), 0.25);
+  }
+
+  .shadow-primary-lg {
+    box-shadow: 0 20px 60px rgba(var(--color-primary-rgb), 0.4);
+  }
+
+  /* Gradient background */
+  .bg-gradient-primary {
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+  }
+
+  /* Background glow orb */
+  .bg-glow-primary {
+    background-color: rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  /* Checkbox/Toggle primary */
+  .toggle-primary:checked {
+    background-color: var(--color-primary);
+  }
+
+  /* Ring utilities */
+  .ring-primary {
+    --tw-ring-color: var(--color-primary);
+  }
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-primary-rgb), 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--color-primary-rgb), 0.5);
+}
+
+/* Selection */
+::selection {
+  background: rgba(var(--color-primary-rgb), 0.3);
+}
+
+/* Input focus */
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(var(--color-primary-rgb), 0.5) !important;
+  outline: none;
+}
+
+/* Checkbox styling */
+input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}

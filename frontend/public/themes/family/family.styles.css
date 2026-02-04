@@ -1,0 +1,298 @@
+/**
+ * FAMILY THEME STYLES
+ * Tema-spesifik CSS stilleri
+ * Bu dosya sadece Family teması aktifken yüklenir
+ */
+
+/* ============================================
+   FAMILY THEME - GLOBAL OVERRIDES
+   ============================================ */
+
+[data-theme="family"] {
+  /* Smooth scroll behavior */
+  scroll-behavior: smooth;
+}
+
+[data-theme="family"] body {
+  font-family: var(--font-family-body);
+  background: var(--color-background);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+}
+
+/* ============================================
+   BUTTONS - Yumuşak, yuvarlak, lift effect
+   ============================================ */
+
+[data-theme="family"] .theme-button {
+  padding: var(--button-padding);
+  border-radius: var(--border-radius-full);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  transition: all var(--transition-speed) var(--transition-timing);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="family"] .theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="family"] .theme-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="family"] .theme-button-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+[data-theme="family"] .theme-button-secondary {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* ============================================
+   CARDS - Elevated, yumuşak gölgeler
+   ============================================ */
+
+[data-theme="family"] .theme-card {
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-speed) var(--transition-timing);
+  border: var(--border-width-thin) solid var(--color-border);
+}
+
+[data-theme="family"] .theme-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* ============================================
+   INPUTS - Filled style, yumuşak
+   ============================================ */
+
+[data-theme="family"] .theme-input {
+  height: var(--input-height);
+  padding: 0 var(--spacing-md);
+  background: rgba(var(--color-primary-rgb), 0.05);
+  border: var(--border-width-normal) solid transparent;
+  border-radius: var(--border-radius-md);
+  font-size: var(--input-font-size);
+  font-family: var(--font-family-body);
+  color: var(--color-text);
+  transition: all var(--transition-speed) var(--transition-timing);
+}
+
+[data-theme="family"] .theme-input:focus {
+  outline: none;
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
+[data-theme="family"] .theme-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   HEADER - Solid, shadow, sticky
+   ============================================ */
+
+[data-theme="family"] .theme-header {
+  height: var(--header-height);
+  background: var(--color-surface);
+  border-bottom: var(--border-width-thin) solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* ============================================
+   HERO - Split layout, minimal background
+   ============================================ */
+
+[data-theme="family"] .theme-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+  padding: var(--spacing-3xl) 0;
+  text-align: left;
+}
+
+[data-theme="family"] .theme-hero-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-lg);
+}
+
+[data-theme="family"] .theme-hero-subtitle {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ============================================
+   TYPOGRAPHY - Quicksand headings
+   ============================================ */
+
+[data-theme="family"] h1,
+[data-theme="family"] h2,
+[data-theme="family"] h3,
+[data-theme="family"] h4,
+[data-theme="family"] h5,
+[data-theme="family"] h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+}
+
+[data-theme="family"] h1 { font-size: var(--font-size-5xl); }
+[data-theme="family"] h2 { font-size: var(--font-size-4xl); }
+[data-theme="family"] h3 { font-size: var(--font-size-3xl); }
+[data-theme="family"] h4 { font-size: var(--font-size-2xl); }
+[data-theme="family"] h5 { font-size: var(--font-size-xl); }
+[data-theme="family"] h6 { font-size: var(--font-size-lg); }
+
+[data-theme="family"] p {
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text);
+}
+
+/* ============================================
+   BADGES & TAGS - Yumuşak, yuvarlak
+   ============================================ */
+
+[data-theme="family"] .theme-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   LINKS - Underline on hover
+   ============================================ */
+
+[data-theme="family"] a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: all var(--transition-speed) var(--transition-timing);
+  position: relative;
+}
+
+[data-theme="family"] a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width var(--transition-speed) var(--transition-timing);
+}
+
+[data-theme="family"] a:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   GRID SYSTEM - 2rem gap
+   ============================================ */
+
+[data-theme="family"] .theme-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+}
+
+/* ============================================
+   FOOTER - Detailed, 4 columns
+   ============================================ */
+
+[data-theme="family"] .theme-footer {
+  background: var(--color-surface);
+  border-top: var(--border-width-thin) solid var(--color-border);
+  padding: var(--spacing-3xl) 0;
+}
+
+[data-theme="family"] .theme-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-xl);
+}
+
+/* ============================================
+   ICONS - Outline style
+   ============================================ */
+
+[data-theme="family"] .theme-icon {
+  stroke-width: var(--icon-stroke-width);
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* ============================================
+   SCROLLBAR - Themed
+   ============================================ */
+
+[data-theme="family"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="family"] ::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+[data-theme="family"] ::-webkit-scrollbar-thumb {
+  background: rgba(var(--color-primary-rgb), 0.3);
+  border-radius: var(--border-radius-full);
+}
+
+[data-theme="family"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--color-primary-rgb), 0.5);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+[data-theme="family"] ::selection {
+  background: rgba(var(--color-primary-rgb), 0.2);
+  color: var(--color-text);
+}
+
+/* ============================================
+   RESPONSIVE - Mobile adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  [data-theme="family"] .theme-hero {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  [data-theme="family"] .theme-footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  [data-theme="family"] .theme-hero-title {
+    font-size: var(--font-size-4xl);
+  }
+}
