@@ -9,7 +9,7 @@
 [![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white)](https://www.prisma.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-[Demo](https://demo.noramu.com.tr) · [Dokümantasyon](https://docs.noramu.com.tr) · [Hata Bildir](https://github.com/NoramuAIO/Noracommerce/issues)
+[Demo](https:/noramu.com.tr) · [Dokümantasyon](https://docs.noramu.com.tr) · [Hata Bildir](https://github.com/NoramuAIO/Noracommerce/issues)
 
 </div>
 
@@ -133,7 +133,7 @@ Proje Linki: [github.com/NoramuAIO/Noracommerce](https://github.com/NoramuAIO/No
 
 <div align="center">
 
-**[⭐ Star](https://github.com/NoramuAIO/Noracommerce)** · **[🐛 Report Bug](https://github.com/NoramuAIO/Noracommerce/issues)** · **[✨ Request Feature](https://github.com/NoramuAIO/Noracommerce/issues)**
+**[⭐ Star](https://github.com/NoramuAIO/Noraecommarce)** · **[🐛 Report Bug](https://github.com/NoramuAIO/Noraecommarce/issues)** · **[✨ Request Feature](https://github.com/NoramuAIO/Noraecommarce/issues)**
 
 Made with ❤️ by NoramuAIO
 
