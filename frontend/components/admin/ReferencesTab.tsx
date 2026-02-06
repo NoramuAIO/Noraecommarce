@@ -107,9 +107,9 @@ export default function ReferencesTab() {
             animate={{ opacity: 1, y: 0 }}
             className={`glass-card p-4 ${!ref.active ? 'opacity-50' : ''}`}
           >
-            <div className="aspect-video rounded-lg bg-white/[0.03] overflow-hidden mb-3">
+            <div className="aspect-video rounded-lg bg-white/[0.03] overflow-hidden mb-3 flex items-center justify-center">
               {ref.image ? (
-                <img src={ref.image} alt={ref.name} className="w-full h-full object-cover object-center" />
+                <img src={ref.image} alt={ref.name} className="w-full h-full object-contain" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <ImageIcon className="w-8 h-8 text-gray-600" />

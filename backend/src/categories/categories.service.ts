@@ -6,9 +6,20 @@ export class CategoriesService {
   constructor(private prisma: PrismaService) {}
 
   async findAll() {
-    return this.prisma.category.findMany({
-      include: { _count: { select: { products: true } } },
+    const categories = await this.prisma.category.findMany({
+      include: { 
+        _count: { 
+          select: { 
+            products: { 
+              where: { price: { gt: 0 } } // Sadece ücretli ürünleri say
+            } 
+          } 
+        } 
+      },
     });
+    
+    // Sadece en az 1 ücretli ürünü olan kategorileri döndür
+    return categories.filter(cat => cat._count.products > 0);
   }
 
   async findById(id: number) {

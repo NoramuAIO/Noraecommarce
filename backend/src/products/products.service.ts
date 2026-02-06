@@ -16,7 +16,10 @@ export class ProductsService {
     }
     return this.prisma.product.findMany({
       where,
-      include: { category: true },
+      include: { 
+        category: true,
+        _count: { select: { favorites: true } },
+      },
       orderBy: { createdAt: 'desc' },
     });
   }
@@ -60,6 +63,7 @@ export class ProductsService {
         category: true,
         changelogs: { orderBy: { createdAt: 'desc' }, take: 10 },
         productReviews: { where: { approved: true }, orderBy: { createdAt: 'desc' } },
+        _count: { select: { favorites: true } },
       },
     });
   }

@@ -42,23 +42,21 @@ async function bootstrap() {
   // Global prefix
   app.setGlobalPrefix('api');
   
-  // Cross-Origin-Resource-Policy header for static files
-  app.use('/uploads', (_req, res, next) => {
-    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-    next();
-  });
-  
-  app.use('/api/uploads', (_req, res, next) => {
-    res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-    next();
-  });
-  
   // Static files - uploads klasörü (hem /uploads hem /api/uploads olarak erişilebilir)
+  // CORS header'ı static files'tan ÖNCE set edilmeli
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/uploads/',
+    setHeaders: (res) => {
+      res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+      res.set('Access-Control-Allow-Origin', '*');
+    },
   });
   app.useStaticAssets(join(process.cwd(), 'uploads'), {
     prefix: '/api/uploads/',
+    setHeaders: (res) => {
+      res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+      res.set('Access-Control-Allow-Origin', '*');
+    },
   });
   
   // Validation - Strict input validation (prevents injection attacks)

@@ -2,6 +2,7 @@
 
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 
 interface MarkdownRendererProps {
   content: string
@@ -13,12 +14,34 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
     <div className={`markdown-content ${className}`}>
       <ReactMarkdown 
         remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={{
-          h1: ({ children }) => <h1 className="text-2xl font-bold text-white mb-4 mt-6 first:mt-0">{children}</h1>,
-          h2: ({ children }) => <h2 className="text-xl font-semibold text-white mb-3 mt-5 first:mt-0">{children}</h2>,
-          h3: ({ children }) => <h3 className="text-lg font-semibold text-white mb-2 mt-4 first:mt-0">{children}</h3>,
+          div: ({ children, ...props }: any) => {
+            const align = props.align || props['data-align']
+            const textAlignClass = align === 'center' ? 'text-center' : align === 'right' ? 'text-right' : align === 'left' ? 'text-left' : ''
+            return <div className={textAlignClass} {...props}>{children}</div>
+          },
+          h1: ({ children, ...props }: any) => {
+            const style = props.style || {}
+            const textAlignClass = style.textAlign === 'center' ? 'text-center' : style.textAlign === 'right' ? 'text-right' : ''
+            return <h1 className={`text-2xl font-bold text-white mb-4 mt-6 first:mt-0 ${textAlignClass}`}>{children}</h1>
+          },
+          h2: ({ children, ...props }: any) => {
+            const style = props.style || {}
+            const textAlignClass = style.textAlign === 'center' ? 'text-center' : style.textAlign === 'right' ? 'text-right' : ''
+            return <h2 className={`text-xl font-semibold text-white mb-3 mt-5 first:mt-0 ${textAlignClass}`}>{children}</h2>
+          },
+          h3: ({ children, ...props }: any) => {
+            const style = props.style || {}
+            const textAlignClass = style.textAlign === 'center' ? 'text-center' : style.textAlign === 'right' ? 'text-right' : ''
+            return <h3 className={`text-lg font-semibold text-white mb-2 mt-4 first:mt-0 ${textAlignClass}`}>{children}</h3>
+          },
           h4: ({ children }) => <h4 className="text-base font-semibold text-white mb-2 mt-3">{children}</h4>,
-          p: ({ children }) => <p className="text-gray-300 leading-relaxed mb-4 last:mb-0">{children}</p>,
+          p: ({ children, ...props }: any) => {
+            const style = props.style || {}
+            const textAlignClass = style.textAlign === 'center' ? 'text-center' : style.textAlign === 'right' ? 'text-right' : ''
+            return <p className={`text-gray-300 leading-relaxed mb-4 last:mb-0 ${textAlignClass}`}>{children}</p>
+          },
           ul: ({ children }) => <ul className="list-disc list-inside text-gray-300 mb-4 space-y-1 ml-2">{children}</ul>,
           ol: ({ children }) => <ol className="list-decimal list-inside text-gray-300 mb-4 space-y-1 ml-2">{children}</ol>,
           li: ({ children }) => <li className="text-gray-300">{children}</li>,

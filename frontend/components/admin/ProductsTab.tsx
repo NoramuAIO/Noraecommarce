@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plus, Search, Edit2, Trash2, X, Save, ChevronUp, Loader2, Image as ImageIcon, Upload } from 'lucide-react'
+import { Plus, Search, Edit2, Trash2, X, Save, ChevronUp, Loader2, Image as ImageIcon, Upload, Heart } from 'lucide-react'
 import api from '@/lib/api'
 import { useToast } from '@/components/Toast'
 import MarkdownEditor from '@/components/MarkdownEditor'
@@ -19,7 +19,7 @@ interface Product {
   category: Category; categoryId: number; description: string; longDescription?: string
   image?: string; downloads: number; status: string; version: string
   minecraftVersions: string; features?: string; requirements?: string
-  updatePolicy: string; images?: string
+  updatePolicy: string; images?: string; _count?: { favorites: number }
 }
 
 export default function ProductsTab() {
@@ -220,6 +220,7 @@ export default function ProductsTab() {
             <th className="text-left py-4 px-4 sm:px-6 text-sm font-medium text-gray-500">Ürün</th>
             <th className="text-left py-4 px-4 sm:px-6 text-sm font-medium text-gray-500 hidden sm:table-cell">Kategori</th>
             <th className="text-left py-4 px-4 sm:px-6 text-sm font-medium text-gray-500">Fiyat</th>
+            <th className="text-left py-4 px-4 sm:px-6 text-sm font-medium text-gray-500 hidden lg:table-cell">Favori</th>
             <th className="text-left py-4 px-4 sm:px-6 text-sm font-medium text-gray-500 hidden md:table-cell">Versiyon</th>
             <th className="text-left py-4 px-4 sm:px-6 text-sm font-medium text-gray-500 hidden sm:table-cell">Durum</th>
             <th className="text-right py-4 px-4 sm:px-6 text-sm font-medium text-gray-500">İşlemler</th>
@@ -248,6 +249,12 @@ export default function ProductsTab() {
                       {product.originalPrice && product.originalPrice > 0 && <span className="text-gray-500 line-through ml-2 text-sm hidden sm:inline">₺{product.originalPrice}</span>}
                     </span>
                   )}
+                </td>
+                <td className="py-4 px-4 sm:px-6 hidden lg:table-cell">
+                  <div className="flex items-center gap-1.5 text-gray-400">
+                    <Heart className="w-4 h-4 text-red-400" />
+                    <span>{product._count?.favorites || 0}</span>
+                  </div>
                 </td>
                 <td className="py-4 px-4 sm:px-6 text-gray-400 hidden md:table-cell">v{product.version}</td>
                 <td className="py-4 px-4 sm:px-6 hidden sm:table-cell"><span className={`px-2.5 py-1 text-xs font-medium rounded-lg whitespace-nowrap ${product.status === 'active' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-gray-500/20 text-gray-400'}`}>

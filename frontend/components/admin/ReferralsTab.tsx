@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Plus, Edit2, Trash2, Save, Loader2, CheckCircle, XCircle, Link2, CreditCard } from 'lucide-react'
+import { Trash2, Save, Loader2, CheckCircle, XCircle, Link2, CreditCard } from 'lucide-react'
 import api from '@/lib/api'
 import { useToast } from '@/components/Toast'
 
@@ -25,25 +25,12 @@ interface Referral {
 export default function ReferralsTab() {
   const [referrals, setReferrals] = useState<Referral[]>([])
   const [loading, setLoading] = useState(true)
-  const [editingId, setEditingId] = useState<number | null>(null)
-  const [saving, setSaving] = useState(false)
   const [savingCredits, setSavingCredits] = useState(false)
   const { showToast } = useToast()
 
   const [creditSettings, setCreditSettings] = useState({
     referralCreditReferred: 50,
     referralCreditReferrer: 50,
-  })
-
-  const [formData, setFormData] = useState({
-    referrerName: '',
-    referrerEmail: '',
-    referrerImage: '',
-    referrerWebsite: '',
-    referrerDiscord: '',
-    status: 'pending',
-    order: 0,
-    active: true,
   })
 
   useEffect(() => {
@@ -73,36 +60,6 @@ export default function ReferralsTab() {
       showToast('Referanslar yüklenemedi', 'error')
     } finally {
       setLoading(false)
-    }
-  }
-
-  const handleEdit = (referral: Referral) => {
-    setEditingId(referral.id)
-    setFormData({
-      referrerName: referral.referrerName,
-      referrerEmail: referral.referrerEmail,
-      referrerImage: referral.referrerImage || '',
-      referrerWebsite: referral.referrerWebsite || '',
-      referrerDiscord: referral.referrerDiscord || '',
-      status: referral.status,
-      order: referral.order,
-      active: referral.active,
-    })
-  }
-
-  const handleSave = async () => {
-    if (!editingId) return
-
-    setSaving(true)
-    try {
-      await api.updateReferral(editingId, formData)
-      showToast('Referans güncellendi', 'success')
-      setEditingId(null)
-      loadReferrals()
-    } catch (error: any) {
-      showToast(error.message || 'İşlem başarısız', 'error')
-    } finally {
-      setSaving(false)
     }
   }
 
@@ -138,20 +95,6 @@ export default function ReferralsTab() {
     }
   }
 
-  const handleCancel = () => {
-    setEditingId(null)
-    setFormData({
-      referrerName: '',
-      referrerEmail: '',
-      referrerImage: '',
-      referrerWebsite: '',
-      referrerDiscord: '',
-      status: 'pending',
-      order: 0,
-      active: true,
-    })
-  }
-
   const handleSaveCredits = async () => {
     setSavingCredits(true)
     try {
@@ -179,7 +122,7 @@ export default function ReferralsTab() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white">Referans Sistemi</h1>
+          <h1 className="text-2xl font-bold text-white">Referansı Alan Kişi</h1>
           <p className="text-gray-500 mt-1">Referans yönetimi ve kredi ayarları</p>
         </div>
       </div>
@@ -234,132 +177,6 @@ export default function ReferralsTab() {
           {savingCredits ? 'Kaydediliyor...' : 'Kredi Ayarlarını Kaydet'}
         </motion.button>
       </motion.div>
-
-      {/* Edit Form */}
-      {editingId && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass-card p-6 mb-8"
-        >
-          <h2 className="text-lg font-semibold text-white mb-4">Referansı Düzenle</h2>
-          <form className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">Ad</label>
-                <input
-                  type="text"
-                  value={formData.referrerName}
-                  onChange={(e) => setFormData({ ...formData, referrerName: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-gray-500"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">E-posta</label>
-                <input
-                  type="email"
-                  value={formData.referrerEmail}
-                  onChange={(e) => setFormData({ ...formData, referrerEmail: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-gray-500"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">Resim URL</label>
-                <input
-                  type="url"
-                  value={formData.referrerImage}
-                  onChange={(e) => setFormData({ ...formData, referrerImage: e.target.value })}
-                  placeholder="https://..."
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-gray-500"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">Website</label>
-                <input
-                  type="url"
-                  value={formData.referrerWebsite}
-                  onChange={(e) => setFormData({ ...formData, referrerWebsite: e.target.value })}
-                  placeholder="https://..."
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-gray-500"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">Discord</label>
-                <input
-                  type="text"
-                  value={formData.referrerDiscord}
-                  onChange={(e) => setFormData({ ...formData, referrerDiscord: e.target.value })}
-                  placeholder="Discord kullanıcı adı"
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white placeholder-gray-500"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">Durum</label>
-                <select
-                  value={formData.status}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white"
-                >
-                  <option value="pending">Beklemede</option>
-                  <option value="approved">Onaylandı</option>
-                  <option value="rejected">Reddedildi</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-400 mb-2 block">Sıra</label>
-                <input
-                  type="number"
-                  value={formData.order}
-                  onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white"
-                />
-              </div>
-
-              <div className="flex items-center gap-3 p-4 bg-white/[0.02] border border-white/[0.08] rounded-xl">
-                <input
-                  type="checkbox"
-                  id="active"
-                  checked={formData.active}
-                  onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                  className="w-4 h-4 rounded border-white/20 bg-white/[0.03] text-violet-600"
-                />
-                <label htmlFor="active" className="text-sm text-gray-300 cursor-pointer">
-                  Aktif
-                </label>
-              </div>
-            </div>
-
-            <div className="flex gap-2 pt-4">
-              <motion.button
-                type="button"
-                disabled={saving}
-                onClick={handleSave}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-medium disabled:opacity-50"
-              >
-                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                {saving ? 'Kaydediliyor...' : 'Kaydet'}
-              </motion.button>
-              <motion.button
-                type="button"
-                onClick={handleCancel}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex-1 px-4 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors"
-              >
-                İptal
-              </motion.button>
-            </div>
-          </form>
-        </motion.div>
-      )}
 
       {/* Referrals List */}
       <div className="glass-card overflow-hidden">
@@ -442,14 +259,6 @@ export default function ReferralsTab() {
                           </motion.button>
                         </>
                       )}
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleEdit(referral)}
-                        className="p-2 text-blue-400 hover:bg-blue-500/20 rounded-lg transition-colors"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </motion.button>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}

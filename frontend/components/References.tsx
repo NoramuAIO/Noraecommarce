@@ -57,11 +57,11 @@ export default function References() {
               className="group"
             >
               <div className="glass-card p-4 hover:border-primary/30 transition-all duration-300">
-                <div className="aspect-video rounded-lg bg-white/[0.03] overflow-hidden mb-3">
+                <div className="aspect-video rounded-lg bg-white/[0.03] overflow-hidden mb-3 flex items-center justify-center">
                   <img 
                     src={ref.image} 
                     alt={ref.name} 
-                    className="w-full h-full object-cover object-center" 
+                    className="w-full h-full object-contain" 
                   />
                 </div>
                 <h3 className="text-white font-medium text-center mb-2">{ref.name}</h3>

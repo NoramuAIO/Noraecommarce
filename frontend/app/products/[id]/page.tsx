@@ -23,6 +23,7 @@ interface Product {
   updatePolicy: string; images?: string; category: { name: string }
   changelogs: { id: number; version: string; changes: string; createdAt: string }[]
   productReviews: { id: number; rating: number; comment: string; userName: string; createdAt: string }[]
+  _count?: { favorites: number }
 }
 
 interface User {
@@ -229,8 +230,6 @@ export default function ProductDetailPage() {
   }
 
   const images = product.images ? product.images.split(',') : (product.image ? [product.image] : [])
-  const features = product.features ? product.features.split('\n').filter(f => f.trim()) : []
-  const requirements = product.requirements ? product.requirements.split('\n').filter(r => r.trim()) : []
   const mcVersions = product.minecraftVersions.split(',').map(v => v.trim())
 
   const badgeColors: Record<string, string> = {
@@ -303,11 +302,16 @@ export default function ProductDetailPage() {
               {/* Kısa açıklama */}
               <p className="text-gray-400 mb-6 leading-relaxed">{product.description}</p>
 
-              <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                 <div className="glass-card p-3 text-center">
                   <Download className="w-5 h-5 text-violet-400 mx-auto mb-1" />
                   <p className="text-white font-semibold text-sm">{product.downloads.toLocaleString()}</p>
                   <p className="text-gray-500 text-xs">İndirme</p>
+                </div>
+                <div className="glass-card p-3 text-center">
+                  <Heart className="w-5 h-5 text-red-400 mx-auto mb-1" />
+                  <p className="text-white font-semibold text-sm">{product._count?.favorites || 0}</p>
+                  <p className="text-gray-500 text-xs">Favori</p>
                 </div>
                 <div className="glass-card p-3 text-center">
                   <Clock className="w-5 h-5 text-fuchsia-400 mx-auto mb-1" />
@@ -461,16 +465,10 @@ export default function ProductDetailPage() {
                     <CheckCircle className="w-5 h-5 text-emerald-400" />
                     Özellikler
                   </h3>
-                  {features.length > 0 ? (
-                    <ul className="space-y-3">
-                      {features.map((feature, index) => (
-                        <motion.li key={index} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }}
-                          className="flex items-start gap-3 text-gray-300">
-                          <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1" />
-                          <span>{feature}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                  {product.features ? (
+                    <div className="prose prose-invert max-w-none">
+                      <MarkdownRenderer content={product.features} />
+                    </div>
                   ) : (
                     <p className="text-gray-500 text-sm">Özellik bilgisi henüz eklenmemiş.</p>
                   )}
@@ -480,16 +478,10 @@ export default function ProductDetailPage() {
                     <Shield className="w-5 h-5 text-fuchsia-400" />
                     Gereksinimler
                   </h3>
-                  {requirements.length > 0 ? (
-                    <ul className="space-y-3">
-                      {requirements.map((req, index) => (
-                        <motion.li key={index} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }}
-                          className="flex items-start gap-3 text-gray-300">
-                          <div className="w-2 h-2 rounded-full bg-fuchsia-400 flex-shrink-0 mt-2" />
-                          <span>{req}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                  {product.requirements ? (
+                    <div className="prose prose-invert max-w-none">
+                      <MarkdownRenderer content={product.requirements} />
+                    </div>
                   ) : (
                     <p className="text-gray-500 text-sm">Gereksinim bilgisi henüz eklenmemiş.</p>
                   )}

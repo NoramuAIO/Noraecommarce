@@ -34,15 +34,24 @@ export default function AdminPage() {
   const { user, loading, isAdmin } = useAuth()
   const router = useRouter()
 
+  // localStorage'dan aktif tab'ı yükle
+  useEffect(() => {
+    const savedTab = localStorage.getItem('adminActiveTab')
+    if (savedTab) {
+      setActiveTab(savedTab)
+    }
+  }, [])
+
   useEffect(() => {
     if (!loading && !isAdmin) {
       router.push('/')
     }
   }, [loading, isAdmin, router])
 
-  // Tab değiştiğinde mobilde sidebar'ı kapat
+  // Tab değiştiğinde mobilde sidebar'ı kapat ve localStorage'a kaydet
   const handleTabChange = (tab: string) => {
     setActiveTab(tab)
+    localStorage.setItem('adminActiveTab', tab)
     setSidebarOpen(false)
   }
 
