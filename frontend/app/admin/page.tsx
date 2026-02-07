@@ -24,6 +24,7 @@ import NotificationsTab from '@/components/admin/NotificationsTab'
 import ReferencesTab from '@/components/admin/ReferencesTab'
 import ReferralsTab from '@/components/admin/ReferralsTab'
 import SettingsTab from '@/components/admin/SettingsTab'
+import ThemeTab from '@/components/admin/ThemeTab'
 import LiveChatTab from '@/components/admin/LiveChatTab'
 import SalesTab from '@/components/admin/SalesTab'
 import PopupsTab from '@/components/admin/PopupsTab'
@@ -130,6 +131,7 @@ export default function AdminPage() {
         {activeTab === 'referrals' && <ReferralsTab />}
         {activeTab === 'notifications' && <NotificationsTab />}
         {activeTab === 'popups' && <PopupsTab />}
+        {activeTab === 'theme' && <ThemeTab />}
         {activeTab === 'settings' && <SettingsTab />}
         {activeTab === 'sales' && <SalesTab />}
       </div>

@@ -53,6 +53,7 @@ const menuGroups = [
     items: [
       { id: 'notifications', name: 'Bildirimler', icon: Bell },
       { id: 'popups', name: 'Popuplar', icon: Bell },
+      { id: 'theme', name: 'Tema Renkleri', icon: Palette },
       { id: 'settings', name: 'Ayarlar', icon: Settings },
     ]
   },
